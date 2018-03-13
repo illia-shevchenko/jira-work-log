@@ -1,0 +1,22 @@
+{
+  "name": "JiraWorkloadClient",
+  "version": "0.0.1",
+  "description": "A clint for tracking workload in Jira",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "keywords": [],
+  "author": "Illia Shevchenko",
+  "devDependencies": {
+    "eslint-plugin-react": "^7.7.0",
+    "microbundle": "^0.4.4"
+  },
+  "dependencies": {
+    "ramda": "^0.25.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}

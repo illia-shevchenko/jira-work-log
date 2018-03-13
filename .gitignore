@@ -1,0 +1,8 @@
+.idea
+vscode
+temp
+reports
+
+node_modules
+
+*.log
