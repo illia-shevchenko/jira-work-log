@@ -6,7 +6,7 @@ const router = new Router();
 
 router
   .get('/version', (context) => {
-    context.body = '0.0.1';
+    context.body = '"0.0.1"';
   });
 
 module.exports = router;
