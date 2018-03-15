@@ -15,7 +15,7 @@ module.exports = {
     port: process.env.PORT || 3000,
     host: process.env.HOST || 'localhost',
     ssl: {
-      certificate: process.env.CRT || path.resolve(__dirname, './certificates/server.crt'),
+      cert: process.env.CRT || path.resolve(__dirname, './certificates/server.crt'),
       key: process.env.KEY || path.resolve(__dirname, './certificates/server.key'),
     },
   },

@@ -12,7 +12,7 @@ const config = require('./config');
 
 const options = {
   key: fs.readFileSync(config.server.ssl.key),
-  cert: fs.readFileSync(config.server.ssl.certificate),
+  cert: fs.readFileSync(config.server.ssl.cert),
 };
 
 const nodeServer = https.createServer(options, app.callback());
