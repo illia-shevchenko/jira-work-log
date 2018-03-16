@@ -1,14 +1,14 @@
-'use strict';
-
 const path = require('path');
 
-require('dotenv').config();
+const dotEnvPath = process.cwd().endsWith('client') ? '../' : './';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+require('dotenv').config({ path: path.resolve(dotEnvPath, '.env') });
+
+const { NODE_ENV } = process.env;
 
 const isProd = NODE_ENV === 'production';
 const isTest = NODE_ENV === 'test';
-const isDev = NODE_ENV === 'development';
+const isDev = !isProd && !isTest;
 
 module.exports = {
   server: {
@@ -18,6 +18,18 @@ module.exports = {
       cert: process.env.CRT || path.resolve(__dirname, './certificates/server.crt'),
       key: process.env.KEY || path.resolve(__dirname, './certificates/server.key'),
     },
+  },
+
+  client: {
+    path: path.resolve(__dirname, '../../client/dist'),
+    outDir: 'dist',
+    outFile: 'index.html',
+    publicUrl: './',
+    watch: isDev,
+    minify: isProd,
+    sourceMaps: isDev,
+    detailedReport: isDev,
+    logLevel: isDev ? 3 : 2,
   },
 
   env: {
