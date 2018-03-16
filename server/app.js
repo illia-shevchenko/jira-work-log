@@ -2,6 +2,7 @@
 
 const config = require('./config');
 const Koa = require('koa');
+const serve = require('koa-static');
 
 /**
  * @type {Application}
@@ -23,6 +24,9 @@ if (!config.env.isTest) {
   app.use(responseTime());
   app.use(helmet());
 }
+
+console.log('Start static: ', config.client.path);
+app.use(serve(config.client.path));
 
 app.use(logger());
 app.use(bodyParser(config.bodyParser));
