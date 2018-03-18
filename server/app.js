@@ -19,11 +19,14 @@ const bodyParser = require('koa-bodyparser');
 
 /** @type {Router} */
 const routes = require('./routes');
+const error = require('./middleware/error');
 
 if (!config.env.isTest) {
   app.use(responseTime());
   app.use(helmet());
 }
+
+app.use(error());
 
 console.log('Start static: ', config.client.path);
 app.use(serve(config.client.path));

@@ -9,16 +9,12 @@ const { credentials } = require('../../config');
 
 router
   .post('/', (context, next) => {
-    if (equals(context.request.body, credentials)) {
-      context.session.username = credentials.username;
-      context.body = 'ok!';
+    context.assert(equals(context.request.body, credentials), 401, 'Wrong credentials');
 
-      next();
-      return;
-    }
+    context.session.username = credentials.username;
+    context.body = 'ok!';
 
-    context.status = 401;
-    context.body = 'Wrong credentials';
+    next();
   });
 
 /** @type {Router} */
