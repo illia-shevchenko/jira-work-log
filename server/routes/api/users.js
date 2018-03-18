@@ -6,10 +6,12 @@ const router = new Router();
 
 router
   .get('/', async (context) => {
-    console.log(context.querystring);
+    const {
+      filter: username,
+    } = context.query;
 
     try {
-      context.body = await context.state.jiraClient.user.search({ username: '' });
+      context.body = await context.state.jiraClient.user.search({ username });
     } catch (error) {
       context.throw(500, 'Jira error', { isJira: true, original: error });
     }
