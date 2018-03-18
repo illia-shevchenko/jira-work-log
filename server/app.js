@@ -3,7 +3,7 @@
 const config = require('./config');
 const Koa = require('koa');
 const serve = require('koa-static');
-
+const session = require('koa-session');
 /**
  * @type {Application}
  */
@@ -27,6 +27,8 @@ if (!config.env.isTest) {
 
 console.log('Start static: ', config.client.path);
 app.use(serve(config.client.path));
+
+app.use(session(config.session, app));
 
 app.use(logger());
 app.use(bodyParser(config.bodyParser));
