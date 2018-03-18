@@ -20,6 +20,7 @@ const bodyParser = require('koa-bodyparser');
 /** @type {Router} */
 const routes = require('./routes');
 const error = require('./middleware/error');
+const jiraClient = require('./jira/middleware');
 
 if (!config.env.isTest) {
   app.use(responseTime());
@@ -36,6 +37,7 @@ app.use(session(config.session, app));
 app.use(logger());
 app.use(bodyParser(config.bodyParser));
 
+app.use(jiraClient());
 app.use(routes.routes());
 
 module.exports = app;
