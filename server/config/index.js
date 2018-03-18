@@ -23,8 +23,9 @@ const jiraCredentials = {
   username: process.env.JIRA_USERNAME,
   password: process.env.JIRA_PASSWORD,
 };
+const jiraHost = process.env.JIRA_HOST;
 
-if (!jiraCredentials.password || !jiraCredentials.username) {
+if (!jiraHost || !jiraCredentials.password || !jiraCredentials.username) {
   throw Error('Jira credentials should be provided to start the application');
 }
 
@@ -39,7 +40,10 @@ module.exports = {
   },
 
   credentials,
-  jiraCredentials,
+  jira: {
+    credentials: jiraCredentials,
+    host: jiraHost,
+  },
 
   client: {
     path: path.resolve(__dirname, '../../client/dist'),

@@ -1,7 +1,7 @@
 const JiraClient = require('jira-connector');
-const { jiraCredentials } = require('../config');
+const { jira } = require('../config');
 
 exports.client = new JiraClient({
-  host: 'fbc-ss.atlassian.net',
-  basic_auth: jiraCredentials, // eslint-disable-line camelcase
+  host: jira.host,
+  basic_auth: jira.credentials, // eslint-disable-line camelcase
 });
