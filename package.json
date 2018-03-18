@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./server/index.js",
     "start:client": "cd client && npm start",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config ./server/jest.config.js",
     "lint": "eslint ./",
     "lint:fix": "npm run lint -- --fix",
     "prepush": "npm run lint",
