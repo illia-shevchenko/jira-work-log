@@ -7,6 +7,8 @@ const router = new Router();
 const login = require('./login');
 /** @type {Router} */
 const users = require('./users');
+/** @type {Router} */
+const worklog = require('./worklog');
 
 const { auth } = require('../../middleware/authentication');
 router
@@ -16,5 +18,6 @@ router
 
 router.use('/login', login.routes());
 router.use('/users', auth(), users.routes());
+router.use('/worklog', auth(), worklog.routes());
 
 module.exports = router;
