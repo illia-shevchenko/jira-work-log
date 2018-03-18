@@ -10,6 +10,24 @@ const isProd = NODE_ENV === 'production';
 const isTest = NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
+const credentials = {
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
+};
+
+if (!credentials.password || !credentials.username) {
+  throw Error('Credentials should be provided to start the application');
+}
+
+const jiraCredentials = {
+  username: process.env.JIRA_USERNAME,
+  password: process.env.JIRA_PASSWORD,
+};
+
+if (!jiraCredentials.password || !jiraCredentials.username) {
+  throw Error('Jira credentials should be provided to start the application');
+}
+
 module.exports = {
   server: {
     port: process.env.PORT || 3000,
@@ -19,6 +37,9 @@ module.exports = {
       key: process.env.KEY || path.resolve(__dirname, './certificates/server.key'),
     },
   },
+
+  credentials,
+  jiraCredentials,
 
   client: {
     path: path.resolve(__dirname, '../../client/dist'),
@@ -42,7 +63,11 @@ module.exports = {
     enableTypes: ['json'],
   },
 
-  secret: process.env.SECRET || 'secret',
+  secret: process.env.SECRET || 'jira_secret',
+
+  session: {
+    key: 'session',
+  },
 
   jwt: {
     secret: process.env.JWT_SECRET || 'secret',
@@ -50,6 +75,4 @@ module.exports = {
       expiresIn: '7d',
     },
   },
-
-  jira: {},
 };
