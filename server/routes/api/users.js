@@ -1,8 +1,10 @@
-'use strict';
+const { pick, map } = require('ramda');
 
 const Router = require('koa-router');
 /** @type {Router} */
 const router = new Router();
+
+const pickUserProps = map(pick(['name', 'avatarUrls']));
 
 router
   .get('/', async (context) => {
@@ -11,7 +13,8 @@ router
     } = context.query;
 
     try {
-      context.body = await context.state.jiraClient.user.search({ username });
+      const users = await context.state.jiraClient.user.search({ username });
+      context.body = pickUserProps(users);
     } catch (error) {
       context.throw(500, 'Jira error', { isJira: true, original: error });
     }
