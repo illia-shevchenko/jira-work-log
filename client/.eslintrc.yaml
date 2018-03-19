@@ -49,8 +49,6 @@ rules:
   react/jsx-indent-props:
     - error
     - 2
-  react/jsx-no-literals:
-    - error
   react/jsx-equals-spacing:
     - error
     - never
@@ -58,13 +56,18 @@ rules:
   - error
   react/jsx-curly-spacing:
     - error
-    - when: never
+    - when: always
       children: true
       spacing:
         objectLiterals: always
+  react/prop-types: off
   no-console:
     - error
-
+  no-extra-parens:
+    - error
+    - all
+    - enforceForArrowConditionals: false
+      ignoreJSX: all
 overrides:
   - files:
     - src/**/*.spec{.jsx,.js}
