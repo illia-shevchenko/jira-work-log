@@ -12,7 +12,7 @@ router
     context.assert(equals(context.request.body, credentials), 401, 'Wrong credentials');
 
     context.session.username = credentials.username;
-    context.body = 'ok!';
+    context.body = '"ok!"';
 
     next();
   });
