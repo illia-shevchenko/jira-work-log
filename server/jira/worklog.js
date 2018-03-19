@@ -25,18 +25,6 @@ exports.getRequestParams = (jqlParams) =>
     jql: getJql(jqlParams),
   }, requestParams);
 
-const getDates = (dateFrom, dateTo) => {
-  const date = new Date(dateFrom);
-  const result = [];
-
-  while (date <= dateTo) {
-    result.push(transformDate(date));
-    date.setDate(date.getDate() + 1);
-  }
-
-  return result;
-};
-
 const getDateChecker = (dateFrom, dateTo) => {
   const dates = {
     from: new Date(dateFrom),
@@ -93,7 +81,4 @@ const addDateWorklogTo = (result, { name, date, timeSpentSeconds, issue }) => {
   day.issues.push(issue);
 };
 
-exports.fromSearchResult = (issues, { usernames, dateFrom, dateTo } = {}) => ({
-  days: getDates(dateFrom, dateTo),
-  users: getUserLogs(issues, { usernames, dateFrom, dateTo }),
-});
+exports.fromSearchResult = getUserLogs;

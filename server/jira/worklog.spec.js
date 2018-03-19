@@ -88,17 +88,8 @@ describe('Jira worklog service', () => {
       });
     });
 
-    it('should provide list of days', () => {
-      expect(result.days).toEqual([
-        '2017-01-30',
-        '2017-01-31',
-        '2017-02-01',
-        '2017-02-02',
-      ]);
-    });
-
     it('should provide proper list of users', () => {
-      expect(result.users).toEqual([{
+      expect(result).toEqual([{
         username: 'Bob',
         days: {
           '2017-01-31': {
