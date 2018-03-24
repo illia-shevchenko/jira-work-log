@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react';
+import React, { Component } from 'react';
 import { FormGroup, Form, FormControl, Col, Button, ControlLabel, HelpBlock } from 'react-bootstrap';
 
 import { login as callLogin } from '../api/resources';
@@ -20,8 +20,11 @@ const InputFormGroup = ({ controlId, text, type = 'text', onChange, help, valida
         placeholder={ text }
         onChange={ onChange }
       />
-      <FormControl.Feedback/>
-      { help && <HelpBlock>{ help }</HelpBlock> }
+      <FormControl.Feedback />
+      { help && (
+        <HelpBlock>
+          { help }
+        </HelpBlock>) }
     </Col>
   </FormGroup>
 );
