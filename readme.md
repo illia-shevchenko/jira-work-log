@@ -26,7 +26,6 @@ To run app
 4. [Run the server](#run-server)
 5. Go to root page of a host:port configured by ENV variables
 
-NOTE. Currently [server](#server) doesn't support client side routing and in case of refreshing a page not in a root will cause 404 errors.
 
 ## <a name="server">**Server**</a>
 
