@@ -13,6 +13,7 @@ parserOptions:
 
 extends:
   - plugin:react/recommended
+  - ../.eslintrc.yaml
 
 plugins:
   - react

@@ -7,7 +7,7 @@
     "start": "node ./server/index.js",
     "start:client": "cd client && npm start",
     "test": "jest --config ./server/jest.config.js",
-    "lint": "eslint ./",
+    "lint": "eslint ./ --ext=.js,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "prepush": "npm run lint && npm test",
     "precommit": "lint-staged"
