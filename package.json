@@ -9,7 +9,7 @@
     "test": "jest --config ./server/jest.config.js",
     "lint": "eslint ./",
     "lint:fix": "npm run lint -- --fix",
-    "prepush": "npm run lint",
+    "prepush": "npm run lint && npm test",
     "precommit": "lint-staged"
   },
   "lint-staged": {
