@@ -1,6 +1,6 @@
 const Bundler = require('parcel-bundler');
 
-const { client } = require('../server/config');
+const { client } = require('../config');
 
 const bundler = new Bundler('index.html', client);
 

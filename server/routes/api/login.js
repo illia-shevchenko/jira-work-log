@@ -5,7 +5,7 @@ const Router = require('koa-router');
 const router = new Router();
 
 const { equals } = require('ramda');
-const { credentials } = require('../../config');
+const { credentials } = require('../../../config');
 
 router
   .post('/', (context, next) => {

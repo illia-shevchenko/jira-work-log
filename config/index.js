@@ -46,7 +46,7 @@ module.exports = {
   },
 
   client: {
-    path: path.resolve(__dirname, '../../client/dist'),
+    path: path.resolve(__dirname, '../client/dist'),
     outDir: 'dist',
     outFile: 'index.html',
     publicUrl: './',

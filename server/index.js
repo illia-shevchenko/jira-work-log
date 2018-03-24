@@ -8,7 +8,7 @@ const httpShutdown = require('http-shutdown');
  * @type {Application}
  */
 const app = require('./app');
-const config = require('./config');
+const config = require('../config');
 
 const options = {
   key: fs.readFileSync(config.server.ssl.key),

@@ -1,4 +1,4 @@
-const { credentials } = require('../config');
+const { credentials } = require('../../config');
 
 module.exports.auth =
   () =>

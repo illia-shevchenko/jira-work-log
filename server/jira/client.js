@@ -1,5 +1,5 @@
 const JiraClient = require('jira-connector');
-const { jira } = require('../config');
+const { jira } = require('../../config');
 
 exports.client = new JiraClient({
   host: jira.host,

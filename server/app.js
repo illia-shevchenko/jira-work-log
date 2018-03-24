@@ -1,6 +1,6 @@
 'use strict';
 
-const config = require('./config');
+const config = require('../config');
 const Koa = require('koa');
 const serve = require('koa-static');
 const session = require('koa-session');
