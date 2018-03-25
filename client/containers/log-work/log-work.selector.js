@@ -67,7 +67,7 @@ const getForAGroup = curry((daysList, usersMap, { name, users: userNames, toAdd,
 export const get = (state) => {
   const groups = select.groups.all(state);
   const days = select.calendar.days(state);
-  const users = select.users.map(state);
+  const users = select.users.worklog(state);
 
   return map(getForAGroup(days, users), groups);
 };

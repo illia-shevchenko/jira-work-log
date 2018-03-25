@@ -1,14 +1,17 @@
 import { assoc, prop } from 'ramda';
 import { select } from '@rematch/select';
-import { queryUsers } from '../api/resources';
+import { queryWorklog } from '../api/resources';
 
-const normalizeList = (list) => list.reduce((result, item) => assoc(item.username, item.days, result), {});
+const normalizeList = (list) =>
+  list.reduce((result, item) =>
+    assoc(item.username, item.days, result), {});
+
 export const users = {
-  state: { map: {}, error: null },
+  state: { worklog: {}, error: null },
   reducers: {
-    setList: (state, list) => ({ map: normalizeList(list), error: null }),
-    setError: (state, error) => ({ map: state.map, error }),
-    clearError: (state) => ({ map: state.map, error: null }),
+    setWorklog: (state, list) => ({ worklog: normalizeList(list), error: null }),
+    setError: (state, error) => assoc('error', error, state),
+    clearError: (state) => assoc('error', null, state),
   },
   effects: {
     async query(payload, rootState) {
@@ -23,14 +26,14 @@ export const users = {
 
         const { dateFrom, dateTo } = select.calendar.range(rootState);
 
-        const users = await queryUsers({ usernames, dateFrom, dateTo });
-        this.setList(users);
+        const worklog = await queryWorklog({ usernames, dateFrom, dateTo });
+        this.setWorklog(worklog);
       } catch (error) {
         this.setError(error);
       }
     },
   },
   selectors: {
-    map: prop('map'),
+    worklog: prop('worklog'),
   },
 };
