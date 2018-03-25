@@ -101,6 +101,10 @@ $border-thin: 1px #ddd solid;
 
   &-input {
     width: 100%;
+
+    &__placeholder {
+      font-style: italic;
+    }
   }
 
   .glyphicon {

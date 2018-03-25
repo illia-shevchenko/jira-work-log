@@ -49,8 +49,11 @@ export class AddUser extends Component {
           </div>
         )
         : (
-          <div onClick={ this.activate }>
-            Click to input user name
+          <div
+            onClick={ this.activate }
+            className="lw-table-input__placeholder"
+          >
+            Click to add a user
           </div>
         )
     );
