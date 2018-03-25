@@ -1,5 +1,5 @@
 import { pick, converge, constructN, pipe, prop } from 'ramda';
-import { getDates } from '../components/calendar/dates.service';
+import { getDates, transformDate } from '../components/calendar/dates.service';
 
 const newDate = constructN(1, Date);
 const fromDate = pipe(prop('dateFrom'), newDate);
@@ -15,7 +15,7 @@ const getWeek = () => {
   const sunday = new Date(monday);
   sunday.setDate(monday.getDate() + 6);
 
-  return { dateFrom: monday, dateTo: sunday };
+  return { dateFrom: transformDate(monday), dateTo: transformDate(sunday) };
 };
 
 export const calendar = {
@@ -30,7 +30,7 @@ export const calendar = {
       dateFrom.setDate(dateFrom.getDate() + daysToIncrement);
       dateTo.setDate(dateTo.getDate() + daysToIncrement);
 
-      return { dateFrom, dateTo };
+      return { dateFrom: transformDate(dateFrom), dateTo: transformDate(dateTo) };
     },
   },
   selectors: {

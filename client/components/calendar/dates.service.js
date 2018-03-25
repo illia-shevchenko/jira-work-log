@@ -1,4 +1,4 @@
-const transformDate = (date) => date.toISOString().slice(0, 10);
+export const transformDate = (date) => date.toISOString().slice(0, 10);
 
 export const getDates = (dateFrom, dateTo) => {
   const date = new Date(dateFrom);
