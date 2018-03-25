@@ -1,7 +1,7 @@
 import { curry, map, assoc, objOf, values } from 'ramda';
 import { select } from '@rematch/select';
+import { getHours } from '../../components/calendar/dates.service';
 
-const getHours = (timeInSeconds) => Math.round(timeInSeconds / 3600);
 const getUserHours = (user, day) =>
   (day.spent || 0) +
   (user[day.date] ? getHours(user[day.date].timeSpentSeconds) : 0); // some dates may be missing
@@ -31,7 +31,7 @@ const getGroupDailyWorklog = (days, users) => {
     return result;
   }, {}); // { '2018-03-02': 10(h) }
 
-  return days.map((day) => assoc('spent', spends[day] || 0, day));
+  return days.map((day) => assoc('spent', spends[day.date] || 0, day));
 };
 
 const getDailyFromList = map(objOf('date'));
@@ -56,7 +56,7 @@ const getByDays = (daysList, usersMap, userNames) => {
 const getForAGroup = curry((daysList, usersMap, { name, users: userNames, toAdd, isOpen }) => {
   const dailyList = getDailyFromList(daysList);
   const { users, total } = getByDays(dailyList, usersMap, userNames);
-  const days = getGroupDailyWorklog(dailyList, users);
+  const days = getGroupDailyWorklog(dailyList, usersMap);
 
   return {
     isOpen, toAdd, name,
