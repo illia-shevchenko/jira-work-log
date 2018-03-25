@@ -5,7 +5,9 @@ import { Router } from 'react-router';
 
 import { history } from './components/history';
 
-import 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 import { App } from './containers/app';
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -6,6 +7,7 @@ import { store } from './store';
 
 import { WorkLog } from './log-work';
 import { Login } from './login';
+
 import './app.scss';
 
 export class App extends Component {
