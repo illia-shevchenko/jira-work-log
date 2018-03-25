@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { select } from '@rematch/select';
 
 import { WorkLogTable as WorkLogTableComponent } from '../../components/worklog-table';
-import { Calendar } from '../../components/calendar';
+import { Calendar } from './calendar';
 import { get as getGroups } from './log-work.selector';
 
 const mapState = (state) => ({
@@ -13,7 +13,8 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = () => ({
-  onLogClick() {
+  onLogClick(payload) {
+    console.info('Clicked: ', payload); // eslint-disable-line no-console
   },
 });
 
