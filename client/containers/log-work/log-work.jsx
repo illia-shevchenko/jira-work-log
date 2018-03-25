@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { dispatch } from '@rematch/core';
 
 import { WorkLogTable } from './log-work-table';
+import { IssueList } from './issue-list';
 
 export class WorkLogComponent extends PureComponent {
   componentWillMount() {
@@ -11,10 +12,17 @@ export class WorkLogComponent extends PureComponent {
 
   render() {
     return (
-      <section>
-        Here will be log work page
-        <WorkLogTable />
-      </section>
+      <Fragment>
+        <section>
+          <h3>
+            Worklog
+          </h3>
+          <WorkLogTable />
+        </section>
+        <section>
+          <IssueList />
+        </section>
+      </Fragment>
     );
   }
 }

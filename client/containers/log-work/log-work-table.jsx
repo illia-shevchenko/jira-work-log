@@ -15,7 +15,7 @@ const mapState = (state) => ({
 
 const mapDispatch = () => ({
   onLogClick(payload) {
-    console.info('Clicked: ', payload); // eslint-disable-line no-console
+    dispatch.issues.set(payload);
   },
   addGroup(name) {
     dispatch.groups.add(name);
