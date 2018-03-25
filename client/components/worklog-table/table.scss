@@ -1,0 +1,101 @@
+@mixin cell-padding {
+  padding: 7px;
+}
+
+$border-thick: 2px #aaa solid;
+$border-thin: 1px #ddd solid;
+
+
+.lw-table {
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+
+  border: $border-thick;
+
+  &__header {
+    color: #fff;
+    background-color: #337ab7;
+  }
+
+  &__body {
+
+  }
+
+  &-group {
+    &:not(:last-child) {
+      border-bottom: $border-thick;
+    }
+
+    &__header {
+      border-bottom: $border-thin;
+      background-color: #dff0d8;
+    }
+
+    &__content {
+
+    }
+  }
+
+  &-row {
+    display: flex;
+
+    &:not(:last-child) {
+      border-bottom: $border-thin;
+    }
+
+    &__header {
+      width: 30%;
+      min-width: 400px;
+      display: flex;
+      justify-content: space-between;
+
+      border-right: $border-thick;
+
+      @include cell-padding;
+    }
+
+    &__content {
+      flex: 1;
+      display: flex;
+    }
+  }
+
+  &-cell {
+    flex: 1;
+    text-align: center;
+
+    &:not(:last-child) {
+      border-right: $border-thin;
+    }
+    @include cell-padding;
+
+    &--hover:hover {
+      background-color: #c7e1ff;
+    }
+  }
+
+  .group-name {
+    font-size: 16px;
+  }
+
+  .group-total {
+    font-size: 10px;
+    font-weight: bolder;
+  }
+
+  .user-name {
+    padding-left: 15px;
+  }
+
+  .user-total {
+    font-size: 10px;
+  }
+
+  .lw-too-small {
+    color: #ff4b37;
+  }
+
+  .lw-too-big {
+    color: #4855ff;
+  }
+}
