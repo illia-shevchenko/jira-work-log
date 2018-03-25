@@ -9,9 +9,13 @@ const requestParams = {
  */
 const transformDate = (date) => date.toISOString().slice(0, 10);
 
-const transformNames = (usernames) =>
-  usernames.map((name) => `"${ name }"`)
-    .join(', ');
+const wrapName = (name) => `"${ name }"`;
+
+const transformNames = (usernames) => (
+  Array.isArray(usernames)
+    ? usernames.map(wrapName).join(', ')
+    : wrapName(usernames)
+);
 
 const getJql = ({ usernames, dateFrom, dateTo }) =>
   [
