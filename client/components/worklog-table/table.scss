@@ -98,4 +98,13 @@ $border-thin: 1px #ddd solid;
   .lw-too-big {
     color: #4855ff;
   }
+
+  &-group-name-input {
+    width: 100%;
+  }
+
+  .glyphicon {
+    font-size: 11px;
+    margin-left: 7px;
+  }
 }

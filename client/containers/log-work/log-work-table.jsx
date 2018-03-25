@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { select } from '@rematch/select';
+import { dispatch } from '@rematch/core';
 
 import { WorkLogTable as WorkLogTableComponent } from '../../components/worklog-table';
 import { Calendar } from './calendar';
@@ -15,6 +16,19 @@ const mapState = (state) => ({
 const mapDispatch = () => ({
   onLogClick(payload) {
     console.info('Clicked: ', payload); // eslint-disable-line no-console
+  },
+  addGroup(name) {
+    dispatch.groups.add(name);
+  },
+  removeGroup(name) {
+    dispatch.groups.remove(name);
+  },
+  addUser({ groupName, userName }) {
+    dispatch.groups.addUser({ groupName, userName });
+    dispatch.users.query();
+  },
+  removeUser({ groupName, userName }) {
+    dispatch.groups.removeUser({ groupName, userName });
   },
 });
 

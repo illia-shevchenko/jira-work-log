@@ -16,6 +16,11 @@ export const users = {
         this.clearError();
 
         const usernames = select.groups.listOfUsers(rootState);
+
+        if (!usernames.length) {
+          return;
+        }
+
         const { dateFrom, dateTo } = select.calendar.range(rootState);
 
         const users = await queryUsers({ usernames, dateFrom, dateTo });
