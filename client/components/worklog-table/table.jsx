@@ -1,10 +1,10 @@
 import React from 'react';
-import { map } from 'ramda';
+import { map, curry } from 'ramda';
 import classnames from 'classnames';
 
 import './table.scss';
 
-const getLogCell = ({ spent: label, isTooSmall, isTooBig, date }, index, onClick) => {
+const getLogCell = curry(({ onClick }, { spent: label, isTooSmall, isTooBig, date }) => {
   const className = classnames('lw-table-cell', 'lw-table-cell--hover', {
     'lw-too-small': isTooSmall,
     'lw-too-big': isTooBig,
@@ -19,9 +19,9 @@ const getLogCell = ({ spent: label, isTooSmall, isTooBig, date }, index, onClick
       { label }
     </div>
   );
-};
+});
 
-const getWorkLogRow = ({ nameClass, totalClass }, worklog, createOnCellClick) => (
+const getWorkLogRow = curry(({ nameClass, totalClass }, createOnCellClick, worklog) => (
   <div
     className="lw-table-row"
     key={ worklog.name }
@@ -35,8 +35,19 @@ const getWorkLogRow = ({ nameClass, totalClass }, worklog, createOnCellClick) =>
       </span>
     </div>
     <div className="lw-table-row__content">
-      { worklog.days.map((day, index) => getLogCell(day, index, createOnCellClick(worklog.name))) }
+      { worklog.days.map(getLogCell({ onClick: createOnCellClick(worklog.name) })) }
     </div>
+  </div>
+));
+const getNewUserRow = () => (
+  <div
+    className="lw-table-row"
+    key="new-user"
+  >
+    <div className="lw-table-row__header">
+      Here will be typeahead
+    </div>
+    <div className="lw-table-row__content" />
   </div>
 );
 
@@ -50,23 +61,29 @@ const groupHeaderClasses = {
   totalClass: 'group-total',
 };
 
-const createOnLogClicker = (handler, isGroup) => (name) => (date) => handler({ isGroup, name, date });
-const getGroup = (group, onCellClick) => (
+const createOnLogClickMaker = (handler, isGroup) => (name) => (date) => handler({ isGroup, name, date });
+const getGroup = curry(({ onCellClick }, group) => (
   <div
     className="lw-table-group"
     key={ group.name }
   >
     <div className="lw-table-group__header">
-      { getWorkLogRow(groupHeaderClasses, group, createOnLogClicker(onCellClick, true)) }
+      { getWorkLogRow(groupHeaderClasses, createOnLogClickMaker(onCellClick, true), group) }
     </div>
-    <div className="lw-table-group__content">
-      { group.users.map((user) => getWorkLogRow(userClasses, user, createOnLogClicker(onCellClick))) }
-    </div>
+    {
+      group.isOpen && (
+        <div className="lw-table-group__content">
+          { [
+            ...group.users.map(getWorkLogRow(userClasses, createOnLogClickMaker(onCellClick))),
+            getNewUserRow(),
+          ] }
+        </div>)
+    }
   </div>
-);
+));
 
-const getGroups = (groups, onCellClick) =>
-  groups.map((group) => getGroup(group, onCellClick));
+const getGroups = ({ onCellClick }, groups) =>
+  groups.map(getGroup({ onCellClick }));
 
 const printDate = (date) => {
   const parts = date.split('-');
@@ -102,7 +119,7 @@ export const WorkLogTable = ({ children, groups, days, onLogClick }) => (
       </div>
     </div>
     <div className="lw-table__body">
-      { getGroups(groups, onLogClick) }
+      { getGroups({ onCellClick: onLogClick }, groups) }
     </div>
   </div>
 );
