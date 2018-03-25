@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
-import { map, curry } from 'ramda';
+import React from 'react';
+import { map, curry, pluck } from 'ramda';
 import classnames from 'classnames';
 import { Glyphicon } from 'react-bootstrap';
+
+import { AddUser } from './add-user';
+import { GroupInput } from './group-input';
 
 import './table.scss';
 
@@ -44,13 +47,17 @@ const getWorkLogRow = curry(({ nameClass, totalClass }, { createOnCellClick, onR
     </div>
   </div>
 ));
-const getNewUserRow = () => (
+
+const getNewUserRow = ({ addUserToGroup, existingUsers }) => (
   <div
     className="lw-table-row"
     key="new-user"
   >
     <div className="lw-table-row__header">
-      Here will be typeahead
+      <AddUser
+        onSubmit={ addUserToGroup }
+        existingUsers={ pluck(['name'], existingUsers) }
+      />
     </div>
     <div className="lw-table-row__content" />
   </div>
@@ -67,7 +74,8 @@ const groupHeaderClasses = {
 };
 
 const createOnLogClickMaker = (handler, isGroup) => (name) => (date) => handler({ isGroup, name, date });
-const getGroup = curry(({ onCellClick, removeGroup, removeUser }, group) => {
+
+const getGroup = curry(({ onCellClick, removeGroup, removeUser, addUser }, group) => {
   const groupOptions = {
     createOnCellClick: createOnLogClickMaker(onCellClick, true),
     onRemove: removeGroup,
@@ -77,6 +85,10 @@ const getGroup = curry(({ onCellClick, removeGroup, removeUser }, group) => {
     onRemove(userName) {
       removeUser({ userName, groupName: group.name });
     },
+  };
+
+  const addUserToGroup = (userName) => {
+    addUser({ userName, groupName: group.name });
   };
 
   return (
@@ -92,7 +104,7 @@ const getGroup = curry(({ onCellClick, removeGroup, removeUser }, group) => {
           <div className="lw-table-group__content">
             { [
               ...group.users.map(getWorkLogRow(userClasses, userOptions)),
-              getNewUserRow(),
+              getNewUserRow({ addUserToGroup, existingUsers: group.users }),
             ] }
           </div>)
       }
@@ -100,8 +112,8 @@ const getGroup = curry(({ onCellClick, removeGroup, removeUser }, group) => {
   );
 });
 
-const getGroups = ({ onCellClick, removeGroup, removeUser }, groups) =>
-  groups.map(getGroup({ onCellClick, removeGroup, removeUser }));
+const getGroups = ({ onCellClick, removeGroup, removeUser, addUser }, groups) =>
+  groups.map(getGroup({ onCellClick, removeGroup, removeUser, addUser }));
 
 const printDate = (date) => {
   const parts = date.split('-');
@@ -124,45 +136,6 @@ const getDateCell = (cellData) => {
 
 const getDateCells = map(getDateCell);
 
-class GroupInput extends Component {
-  static defaultProps() {
-    return {
-      onSubmit() {},
-    };
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.state = { value: '' };
-    this.onChange = this.onChange.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-  }
-
-  onChange({ target: { value } }) {
-    this.setState({ value });
-  }
-
-  onKeyDown({ key }) {
-    if (key === 'Enter') {
-      this.props.onSubmit(this.state.value);
-      this.setState({ value: '' });
-    }
-  }
-
-  render() {
-    return (
-      <input
-        className="lw-table-group-name-input"
-        placeholder="Enter new groups'name"
-        value={ this.state.value }
-        onChange={ this.onChange }
-        onKeyDown={ this.onKeyDown }
-      />
-    );
-  }
-}
-
 const getNewGroupRow = ({ addGroup }) => (
   <div
     className="lw-table-group"
@@ -181,7 +154,7 @@ const getNewGroupRow = ({ addGroup }) => (
   </div>
 );
 
-export const WorkLogTable = ({ children, groups, days, onLogClick, addGroup, removeGroup, removeUser }) => (
+export const WorkLogTable = ({ children, groups, days, onLogClick, addGroup, removeGroup, removeUser, addUser }) => (
   <div className="lw-table">
     <div className="lw-table__header">
       <div className="lw-table-row">
@@ -195,7 +168,7 @@ export const WorkLogTable = ({ children, groups, days, onLogClick, addGroup, rem
     </div>
     <div className="lw-table__body">
       { [
-        ...getGroups({ onCellClick: onLogClick, removeGroup, removeUser }, groups),
+        ...getGroups({ onCellClick: onLogClick, removeGroup, removeUser, addUser }, groups),
         getNewGroupRow({ addGroup }),
       ] }
     </div>

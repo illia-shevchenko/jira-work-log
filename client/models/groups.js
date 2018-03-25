@@ -6,24 +6,24 @@ import {
 
 const matchGroup = propEq('name');
 const findGroupIndex = useWith(findIndex, [matchGroup, identity]);
+const findGroup = useWith(find, [matchGroup, identity]);
 
 export const groups = {
-  state: [{
-    users: ['Maksym_Gichka@epam.com', 'Maxim_Didenko@epam.com'],
-    toAdd: {},
-    name: 'My group',
-    isOpen: true,
-  }, {
-    users: ['maryna_shcherbak', 'Maksym_Gichka@epam.com'],
-    toAdd: {},
-    name: 'Their group',
-    isOpen: true,
-  }],
+  state: [],
   reducers: {
-    add: (groups, name) => (name ? append({ users: [], name, toAdd: {}, isOpen: true }, groups) : groups),
+    add: (groups, name) => (
+      name && !findGroup(name, groups)
+        ? append({
+          users: [],
+          name,
+          toAdd: {},
+          isOpen: true,
+        }, groups)
+        : groups
+    ),
     remove: (groups, name) => remove(findGroupIndex(name, groups), 1, groups),
     addUser: (groups, { groupName, userName }) => {
-      const group = find(matchGroup(groupName), groups);
+      const group = findGroup(groupName, groups);
 
       return adjust(
         evolve({ users: append(userName) }),
@@ -32,7 +32,7 @@ export const groups = {
       );
     },
     removeUser: (groups, { groupName, userName }) => {
-      const group = find(matchGroup(groupName), groups);
+      const group = findGroup(groupName, groups);
 
       return adjust(
         evolve({ users: remove(indexOf(userName, group.users), 1) }),
