@@ -43,6 +43,10 @@ $border-thin: 1px #ddd solid;
       border-bottom: $border-thin;
     }
 
+    &:nth-child(even) {
+      background-color: #e6e6e66b;
+    }
+
     &__header {
       width: 30%;
       min-width: 400px;
