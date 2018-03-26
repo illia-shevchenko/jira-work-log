@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "node build.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config jest.config.js",
     "lint": "eslint ./ --ext=.js,.jsx",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -35,6 +35,7 @@
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.4.3",
     "node-sass": "^4.8.3",
     "parcel-bundler": "^1.6.2"
   }
