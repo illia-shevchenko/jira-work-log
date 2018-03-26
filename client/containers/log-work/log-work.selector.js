@@ -1,4 +1,4 @@
-import { curry, map, assoc, objOf, values } from 'ramda';
+import { curry, map, assoc, objOf } from 'ramda';
 import { select } from '@rematch/select';
 import { getHours } from '../../components/calendar/dates.service';
 
@@ -22,11 +22,10 @@ const getForAUser = (days, user) => {
 };
 
 const getGroupDailyWorklog = (days, users) => {
-  const spends = values(users).reduce((result, days) => {
-    Object.keys(days)
-      .forEach((day) => {
-        result[day] = (result[day] || 0) + getHours(days[day].timeSpentSeconds);
-      });
+  const spends = users.reduce((result, { days }) => {
+    days.forEach(({ date, spent }) => {
+      result[date] = (result[date] || 0) + spent;
+    });
 
     return result;
   }, {}); // { '2018-03-02': 10(h) }
@@ -56,7 +55,7 @@ const getByDays = (daysList, usersMap, userNames) => {
 const getForAGroup = curry((daysList, usersMap, { name, users: userNames, toAdd, isOpen }) => {
   const dailyList = getDailyFromList(daysList);
   const { users, total } = getByDays(dailyList, usersMap, userNames);
-  const days = getGroupDailyWorklog(dailyList, usersMap);
+  const days = getGroupDailyWorklog(dailyList, users);
 
   return {
     isOpen, toAdd, name,
