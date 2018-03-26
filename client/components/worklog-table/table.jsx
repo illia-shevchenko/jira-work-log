@@ -20,7 +20,7 @@ const getLogCell = curry(({ onClick }, { spent: label, isTooSmall, isTooBig, dat
       key={ date }
       onClick={ () => onClick(date) }
     >
-      { label }
+      { label || '' }
     </div>
   );
 });
