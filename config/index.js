@@ -11,8 +11,8 @@ const isTest = NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
 const credentials = {
-  username: process.env.USERNAME,
-  password: process.env.PASSWORD,
+  username: process.env.APP_USERNAME,
+  password: process.env.APP_PASSWORD,
 };
 
 if (!credentials.password || !credentials.username) {

@@ -11,7 +11,7 @@ router
   .post('/', (context, next) => {
     context.assert(equals(context.request.body, credentials), 401, 'Wrong credentials');
 
-    context.session.username = credentials.username;
+    context.session.username = context.request.body.username;
     context.body = '"ok!"';
 
     next();
