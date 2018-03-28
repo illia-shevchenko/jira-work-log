@@ -12,7 +12,7 @@ app.keys = [config.secret];
 
 const responseTime = require('koa-response-time');
 const helmet = require('koa-helmet');
-const logger = require('koa-logger');
+const logger = require('./middleware/logger');
 
 const bodyParser = require('koa-bodyparser');
 

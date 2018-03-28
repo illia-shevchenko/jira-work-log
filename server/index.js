@@ -10,6 +10,8 @@ const httpShutdown = require('http-shutdown');
 const app = require('./app');
 const config = require('../config');
 
+const logger = require('./logger');
+
 const options = {
   key: fs.readFileSync(config.server.ssl.key),
   cert: fs.readFileSync(config.server.ssl.cert),
@@ -21,11 +23,11 @@ const server = httpShutdown(nodeServer);
 server.listen(
   config.server.port,
   config.server.host,
-  () => console.log(`SSL is up on ${ config.server.host }:${ config.server.port }`),
+  () => logger.info(`SSL is up on ${ config.server.host }:${ config.server.port }`),
 );
 
 const shutDown = () => {
-  console.log('Shutdown');
+  logger.info('Shutdown');
 
   if (!server.listening) {
     return;
@@ -33,7 +35,7 @@ const shutDown = () => {
 
   server.shutdown((error) => {
     if (error) {
-      console.error(error);
+      logger.error(error);
     }
   });
 };

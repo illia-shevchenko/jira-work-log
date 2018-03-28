@@ -5,6 +5,8 @@ const api = require('./api');
 const Router = require('koa-router');
 const send = require('koa-send');
 
+const logger = require('../logger');
+
 const { client: { path, outFile } } = require('../../config');
 
 /** @type {Router} */
@@ -12,7 +14,7 @@ const router = new Router();
 
 router.use('/api', api.routes());
 
-console.log('Start static: ', path);
+logger.info('Start static: ', path);
 
 router.get('*', async (context) => {
   try {
