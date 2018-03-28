@@ -1,0 +1,6 @@
+apps:
+  - script   : ./server/index.js
+    name     : 'web-app'
+    error_file: logs/error.log
+    out_file: logs/console.log
+
