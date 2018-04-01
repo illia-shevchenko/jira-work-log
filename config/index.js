@@ -53,8 +53,8 @@ module.exports = {
     watch: isDev,
     minify: isProd,
     sourceMaps: isDev,
-    detailedReport: isDev,
-    logLevel: isDev ? 3 : 2,
+    detailedReport: true,
+    logLevel: 3,
   },
 
   env: {
