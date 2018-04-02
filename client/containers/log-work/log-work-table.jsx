@@ -14,7 +14,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = () => ({
-  onLogClick(payload) {
+  onCellClick(payload) {
     dispatch.issues.set(payload);
   },
   addGroup(name) {
@@ -29,6 +29,9 @@ const mapDispatch = () => ({
   },
   removeUser({ groupName, userName }) {
     dispatch.groups.removeUser({ groupName, userName });
+  },
+  toggleGroup(name) {
+    dispatch.groups.toggle(name);
   },
 });
 

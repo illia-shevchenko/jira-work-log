@@ -5,7 +5,12 @@ import { getGroups, getNewGroupRow } from './groups';
 
 import './table.scss';
 
-export const WorkLogTable = ({ children, groups, days, onLogClick, addGroup, removeGroup, removeUser, addUser }) => (
+export const WorkLogTable = ({
+  children, groups, days,
+  onCellClick,
+  addGroup, removeGroup, toggleGroup,
+  removeUser, addUser,
+}) => (
   <div className="lw-table">
     <div className="lw-table__header">
       <div className="lw-table-row">
@@ -19,7 +24,7 @@ export const WorkLogTable = ({ children, groups, days, onLogClick, addGroup, rem
     </div>
     <div className="lw-table__body">
       { [
-        ...getGroups({ onCellClick: onLogClick, removeGroup, removeUser, addUser }, groups),
+        ...getGroups({ onCellClick, removeGroup, toggleGroup, removeUser, addUser }, groups),
         getNewGroupRow({ addGroup }),
       ] }
     </div>

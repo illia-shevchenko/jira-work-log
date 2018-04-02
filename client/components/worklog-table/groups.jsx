@@ -50,16 +50,18 @@ const groupHeaderClasses = {
 
 const createOnLogClickMaker = (handler, isGroup) => (name) => (date) => handler({ isGroup, name, date });
 
-const getGroup = curry(({ onCellClick, removeGroup, removeUser, addUser }, group) => {
+const getGroup = curry(({ onCellClick, removeGroup, removeUser, addUser, toggleGroup }, group) => {
   const groupOptions = {
     createOnCellClick: createOnLogClickMaker(onCellClick, true),
     onRemove: removeGroup,
+    onNameClick: toggleGroup,
   };
   const userOptions = {
     createOnCellClick: createOnLogClickMaker(onCellClick),
     onRemove(userName) {
       removeUser({ userName, groupName: group.name });
     },
+    onNameClick: (name) => onCellClick({ name }),
   };
 
   const addUserToGroup = (userName) => {
@@ -87,5 +89,5 @@ const getGroup = curry(({ onCellClick, removeGroup, removeUser, addUser }, group
   );
 });
 
-export const getGroups = ({ onCellClick, removeGroup, removeUser, addUser }, groups) =>
-  groups.map(getGroup({ onCellClick, removeGroup, removeUser, addUser }));
+export const getGroups = (options, groups) =>
+  groups.map(getGroup(options));

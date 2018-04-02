@@ -20,25 +20,39 @@ const getLogCell = curry(({ onClick }, { spent: label, isTooSmall, isTooBig, dat
   );
 });
 
-export const getWorkLogRow = curry(({ nameClass, totalClass }, { createOnCellClick, onRemove }, worklog) => (
+export const getWorkLogRow = curry((
+  { nameClass, totalClass },
+  {
+    createOnCellClick,
+    onRemove,
+    onNameClick,
+  },
+  { name, days, total }
+) => (
   <div
     className="lw-table-row"
-    key={ worklog.name }
+    key={ name }
   >
-    <div className="lw-table-row__header">
+    <div
+      className="lw-table-row__header"
+      onClick={ () => { onNameClick(name); } }
+    >
       <span className={ nameClass }>
-        { worklog.name }
+        { name }
         <Glyphicon
           glyph="remove"
-          onClick={ () => onRemove(worklog.name) }
+          onClick={ (event) => {
+            event.stopPropagation();
+            onRemove(name);
+          } }
         />
       </span>
       <span className={ totalClass }>
-        { `Total: ${ worklog.total }` }
+        { `Total: ${ total }` }
       </span>
     </div>
     <div className="lw-table-row__content">
-      { worklog.days.map(getLogCell({ onClick: createOnCellClick(worklog.name) })) }
+      { days.map(getLogCell({ onClick: createOnCellClick(name) })) }
     </div>
   </div>
 ));
