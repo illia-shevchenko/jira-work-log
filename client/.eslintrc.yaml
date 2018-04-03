@@ -26,7 +26,7 @@ rules:
     - error
   react/jsx-boolean-value: error
   react/jsx-one-expression-per-line:
-    - error
+    - off
   react/jsx-closing-bracket-location:
     - error
     - line-aligned
