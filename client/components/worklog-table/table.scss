@@ -78,6 +78,18 @@ $border-thin: 1px #ddd solid;
     &--hover:hover {
       background-color: #c7e1ff;
     }
+
+    &--small {
+      color: #ff4b37;
+    }
+
+    &--big {
+      color: #4855ff;
+    }
+
+    &--day-off {
+     background-color: rgba(#ddd, .3);
+    }
   }
 
   .group-name {
@@ -95,14 +107,6 @@ $border-thin: 1px #ddd solid;
 
   .user-total {
     font-size: 10px;
-  }
-
-  .lw-too-small {
-    color: #ff4b37;
-  }
-
-  .lw-too-big {
-    color: #4855ff;
   }
 
   &-input {

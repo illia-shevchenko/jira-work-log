@@ -1,4 +1,4 @@
-import { curry, map, assoc, objOf } from 'ramda';
+import { curry, map, assoc, objOf, pipe } from 'ramda';
 import { select } from '@rematch/select';
 import { getHours } from '../../components/calendar/dates.service';
 
@@ -33,7 +33,16 @@ const getGroupDailyWorklog = (days, users) => {
   return days.map((day) => assoc('spent', spends[day.date] || 0, day));
 };
 
-const getDailyFromList = map(objOf('date'));
+const daysOff = [6, 0];
+
+const adjustDayOff = ({ date }) => {
+  const dateObj = new Date(date);
+  const isDayOff = daysOff.includes(dateObj.getDay());
+
+  return { date, isDayOff };
+};
+
+const getDailyFromList = map(pipe(objOf('date'), adjustDayOff));
 
 const getByDays = (daysList, usersMap, userNames) => {
   let groupTotal = 0;

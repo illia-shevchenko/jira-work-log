@@ -3,10 +3,12 @@ import { curry } from 'ramda';
 import classnames from 'classnames';
 import { Glyphicon } from 'react-bootstrap';
 
-const getLogCell = curry(({ onClick }, { spent: label, isTooSmall, isTooBig, date }) => {
-  const className = classnames('lw-table-cell', 'lw-table-cell--hover', {
-    'lw-too-small': isTooSmall,
-    'lw-too-big': isTooBig,
+const cellBaseClass = 'lw-table-cell';
+const getLogCell = curry(({ onClick }, { spent: label, isTooSmall, isTooBig, date, isDayOff }) => {
+  const className = classnames(cellBaseClass, `${ cellBaseClass }--hover`, {
+    [`${ cellBaseClass }--small`]: isTooSmall,
+    [`${ cellBaseClass }--big`]: isTooBig,
+    [`${ cellBaseClass }--day-off`]: isDayOff,
   });
 
   return (
