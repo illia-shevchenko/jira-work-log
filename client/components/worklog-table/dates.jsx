@@ -19,7 +19,7 @@ const getDateCell = (cellData) => {
       key={ cellData }
     >
       <div className="lw-date-cell__day">{ parts[2] }</div>
-      <div className="lw-date-cell__month">{ months[+parts[1]] }</div>
+      <div className="lw-date-cell__month">{ months[parts[1] - 1] }</div>
     </div>
   );
 };
