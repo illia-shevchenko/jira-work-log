@@ -67,6 +67,8 @@ $border-thin: 1px #ddd solid;
   &-cell {
     flex: 1;
     text-align: center;
+    min-width: 35px;
+    font-size: 13px;
 
     &:not(:last-child) {
       border-right: $border-thin;

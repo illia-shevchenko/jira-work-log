@@ -1,21 +1,25 @@
 import React from 'react';
 import { map } from 'ramda';
 
-const printDate = (date) => {
-  const parts = date.split('-');
+import './date.scss';
 
-  return `${ parts[2] }.${ parts[1] }`;
-};
+const months = [
+  'Jan', 'Feb', 'Mar',
+  'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep',
+  'Oct', 'Nov', 'Dec',
+];
 
 const getDateCell = (cellData) => {
-  const label = printDate(cellData);
+  const parts = cellData.split('-');
 
   return (
     <div
       className="lw-table-cell lw-date-cell"
-      key={ label }
+      key={ cellData }
     >
-      { label }
+      <div className="lw-date-cell__day">{ parts[2] }</div>
+      <div className="lw-date-cell__month">{ months[+parts[1]] }</div>
     </div>
   );
 };

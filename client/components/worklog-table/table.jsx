@@ -1,9 +1,8 @@
 import React from 'react';
+import './table.scss';
 
 import { getDateCells } from './dates';
 import { getGroups, getNewGroupRow } from './groups';
-
-import './table.scss';
 
 export const WorkLogTable = ({
   children, groups, days,
