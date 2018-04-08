@@ -1,5 +1,17 @@
 .wl-calendar {
-  .btn {
-    margin-left: 20px;
+  .glyphicon {
+    margin: 0 7px;
+  }
+
+  &__separator {
+    margin: 0 7px;
+  }
+
+  &__today {
+    margin-right: 15px;
+  }
+
+  &__type {
+    margin-left: 5px;
   }
 }

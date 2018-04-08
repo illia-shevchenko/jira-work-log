@@ -12,15 +12,19 @@ const load = pipe(dispatch.issues.clear, dispatch.users.query);
 
 const mapDispatch = () => ({
   goToNext() {
-    dispatch.calendar.incrementWeek(1);
+    dispatch.calendar.incrementRange(1);
     load();
   },
   goToPrev() {
-    dispatch.calendar.incrementWeek(-1);
+    dispatch.calendar.incrementRange(-1);
     load();
   },
   goToThis() {
-    dispatch.calendar.setThisWeek();
+    dispatch.calendar.setToday();
+    load();
+  },
+  setRangeType(type) {
+    dispatch.calendar.setRangeType(type);
     load();
   },
 });
