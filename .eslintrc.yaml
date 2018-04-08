@@ -140,9 +140,8 @@ rules:
 
 overrides:
 - files:
-  - client/**/*.spec{.jsx,.js}
-  - server/**/*.spec{.jsx,.js}
+  - '**/*.spec.js'
   rules:
-    max-nested-callbacks: 'off'
+    max-nested-callbacks: off
   env:
     jest: true

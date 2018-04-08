@@ -2,7 +2,6 @@
 env:
   browser: true
   es6: true
-  jest: true
 
 parserOptions:
   ecmaVersion: 8
@@ -71,14 +70,16 @@ rules:
       ignoreJSX: all
 overrides:
   - files:
-    - src/**/*.spec{.jsx,.js}
+    - '**/*.spec{.js,.jsx}'
     rules:
-      max-nested-callbacks: 'off'
+      max-nested-callbacks: off
+    env:
+      jest: true
 
   - files:
     - config/*.js
     - webpack.config.js
 
     rules:
-      no-console: 'off'
-      camelcase: 'off'
+      no-console: off
+      camelcase: off

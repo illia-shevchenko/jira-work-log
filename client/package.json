@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node build.js",
     "test": "jest --config jest.config.js",
-    "lint": "eslint ./ --ext=.js,.jsx",
-    "lint:fix": "npm run lint -- --fix"
+    "lint": "echo \"Use linter on a level upper\" && exit 1"
   },
   "keywords": [],
   "author": "Illia Shevchenko",
@@ -26,15 +25,12 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "recompose": "^0.26.0",
     "redux": "^3.7.2"
   },
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.7.0",
     "jest": "^22.4.3",
     "node-sass": "^4.8.3",
     "parcel-bundler": "^1.6.2"
