@@ -1,7 +1,7 @@
 const { getLink } = require('./issue');
 const requestParams = {
   fields: ['worklog', 'summary'],
-  maxResults: 1000,
+  maxResults: 100,
 };
 
 /**
